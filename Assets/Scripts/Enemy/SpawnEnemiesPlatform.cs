@@ -11,9 +11,11 @@ public class SpawnEnemiesPlatform : MonoBehaviour
     private GameObject currentEnemy;
 
     public float enemySpawnRatio;
+    float currentEnemySpawnRation;
 
     void Start()
     {
+        currentEnemySpawnRation = enemySpawnRatio;
         CreateEnemy();
     }
 
@@ -29,7 +31,7 @@ public class SpawnEnemiesPlatform : MonoBehaviour
     {
         float ratio = Random.Range(0.0f, 1.0f);
 
-        return enemySpawnRatio >= ratio;
+        return currentEnemySpawnRation >= ratio;
     }
 
     void CreateEnemy()
@@ -45,6 +47,10 @@ public class SpawnEnemiesPlatform : MonoBehaviour
             enemy.transform.parent = points[pointIndex].transform;
 
             currentEnemy = enemy;
+        }
+
+        if (currentEnemySpawnRation < 1) {
+            currentEnemySpawnRation += 0.1f;
         }
     }
 }
