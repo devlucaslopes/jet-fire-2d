@@ -8,16 +8,28 @@ public class SpawnHeals : MonoBehaviour
 
     private float timeCount;
     public float spawnTime;
+    private float baseTimeToSpawn;
+
+    private void Start()
+    {
+        baseTimeToSpawn = spawnTime;    
+    }
 
     void Update()
     {
-        timeCount += Time.deltaTime;
-
-        if(timeCount >= spawnTime)
+        if (Time.time >= 15)
         {
-            Spawn();
-            timeCount = 0;
+            timeCount += Time.deltaTime;
+
+            if (timeCount >= spawnTime)
+            {
+                Spawn();
+                timeCount = 0;
+                spawnTime = Random.Range(baseTimeToSpawn - 5, baseTimeToSpawn);
+            }
         }
+
+
     }
 
     void Spawn()
